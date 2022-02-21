@@ -2,8 +2,23 @@ const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.key-container')
 const messageDisplay = document.querySelector('.message-container')
 
+let words = []
+let wordle
 
-let wordle = "SUPER"
+const getWordle = () => {
+    fetch('word.json')
+        .then(response => response.json())
+        .then(json => {
+            words = json.words
+
+            const randomNumber = Math.floor(Math.random() * 1300) - 41;
+            wordle = words[randomNumber]
+            //console.log(wordle)
+        })
+}
+getWordle()
+
+
 const keys = [
     'E',
     'R',
@@ -78,16 +93,16 @@ keys.forEach(key => {
 
 const handleClick = (letter) => {
     if (!isGameOver) {
-        console.log("Tıklandı", letter)
+        //console.log("Tıklandı", letter)
         if (letter === '«') {
             deleteLetter()
-            console.log('gues', guessRows)
+            // console.log('gues', guessRows)
             return
         }
 
         if (letter === 'ENTER') {
             checkRow()
-            console.log('gues', guessRows)
+            //console.log('gues', guessRows)
             return
         }
         addLetter(letter)
@@ -122,24 +137,38 @@ const deleteLetter = () => {
 
 const checkRow = () => {
     const guess = guessRows[currentRow].join('')
-    if (currentTile > 4) {
-        flipTile()
-        if (wordle == guess) {
-            showMassage('Harika!')
-            isGameOver = true
-            return
-        } else {
-            if (currentRow >= 5) {
-                isGameOver = true
-                showMassage(wordle)
-                return
-            }
 
-            if (currentRow < 5) {
-                currentRow++
-                currentTile = 0
-            }
-        }
+    if (currentTile > 4) {
+
+        fetch('word.json')
+            .then(response => response.json())
+            .then(json => {
+                if (!json.words.includes(guess)) {
+                    showMassage('Listede böyle bir kelime yok')
+                    return
+                } else {
+
+                    flipTile()
+                    if (wordle == guess) {
+                        showMassage('Harika!')
+                        isGameOver = true
+                        return
+                    } else {
+                        if (currentRow >= 5) {
+                            isGameOver = true
+                            showMassage(wordle)
+                            return
+                        }
+
+                        if (currentRow < 5) {
+                            currentRow++
+                            currentTile = 0
+                        }
+                    }
+                }
+            })
+
+
     }
 
 }
@@ -194,9 +223,4 @@ const flipTile = () => {
             addColorToKey(guess[index].letter, guess[index].color)
         }, 500 * index)
     })
-}
-
-
-const changeWord = () => {
-
 }
