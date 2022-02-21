@@ -6,6 +6,9 @@
 
 body {
   background-color: #121213;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .game-container {
@@ -17,14 +20,34 @@ body {
 }
 
 .title-container {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 510px;
+  height: 51px;
   border-bottom: solid 1px #3a3a3c;
 }
-
+.title-container .menu button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.title-container .menu button svg {
+  height: 24px;
+  width: 24px;
+}
+.title {
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #d7dadc;
+}
 .tile-container {
   width: 330px;
-  margin-bottom: 30px;
+  margin: 12px 0;
 }
 
 .key-container {
@@ -40,6 +63,7 @@ body {
   border: none;
   background-color: #818384;
   margin: 4px;
+  cursor: pointer;
 }
 
 .key-container button:nth-child(11) {
@@ -78,8 +102,10 @@ body {
 }
 
 .tile-container .tile {
-  width: 62px;
-  height: 62px;
+  width: 56px;
+  height: 56px;
+  font-size: 30px;
+  font-weight: bold;
   border: 2px solid#3a3a3c;
   box-sizing: border-box;
   display: flex;

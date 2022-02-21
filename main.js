@@ -144,7 +144,7 @@ const checkRow = () => {
             .then(response => response.json())
             .then(json => {
                 if (!json.words.includes(guess)) {
-                    showMassage('Listede böyle bir kelime yok')
+                    showMassage('Kelime listesinde yok')
                     return
                 } else {
 
@@ -184,8 +184,9 @@ const showMassage = (message) => {
         messageDisplay.removeChild(messageElement);
         messageDisplay.style.margin = '0'
 
-    }, 3000)
+    }, 4000)
 }
+
 const addColorToKey = (keyLetter, color) => {
     const key = document.getElementById(keyLetter)
     key.classList.add(color)
