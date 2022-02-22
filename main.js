@@ -111,14 +111,14 @@ const handleClick = (letter) => {
 }
 
 const addLetter = (letter) => {
+    const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
     if (currentTile < 5 && currentRow < 6) {
         const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
         tile.textContent = letter
         guessRows[currentRow][currentTile] = letter
         tile.setAttribute('data', letter)
         currentTile++
-
-
+        tile.classList.add('PopIn')
     }
 
 
@@ -145,6 +145,7 @@ const checkRow = () => {
             .then(json => {
                 if (!json.words.includes(guess)) {
                     showMassage('Kelime listesinde yok')
+                    shakeTile()
                     return
                 } else {
 
@@ -225,3 +226,11 @@ const flipTile = () => {
         }, 500 * index)
     })
 }
+
+const shakeTile = () => {
+    const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
+    rowTiles.forEach((tile, index) => {
+        tile.classList.add('shake')
+    })
+}
+
