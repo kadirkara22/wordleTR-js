@@ -125,7 +125,10 @@ body {
   margin: 0;
 }
 
-.tile.flip {
+.PopIn.flip {
+  animation: 0.5s linear flipping;
+}
+.PopIn.shake.flip {
   animation: 0.5s linear flipping;
 }
 
@@ -140,7 +143,7 @@ body {
     transform: rotateX(0deg);
   }
 }
-.tile.shake {
+.PopIn.shake {
   animation: shake 0.6s;
 }
 
@@ -164,7 +167,7 @@ body {
   }
 }
 
-.tile.PopIn {
+.PopIn {
   animation: PopIn 0.1s;
 }
 @keyframes PopIn {
@@ -176,6 +179,34 @@ body {
   40% {
     transform: scale(1.1);
     opacity: 1;
+  }
+}
+
+.flip.win {
+  animation: Bounce 0.9s;
+}
+.shake.flip.win {
+  animation: Bounce 0.9s;
+}
+@keyframes Bounce {
+  0%,
+  20% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+  80% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 

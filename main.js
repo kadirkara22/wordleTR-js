@@ -13,8 +13,9 @@ const getWordle = () => {
 
             const randomNumber = Math.floor(Math.random() * 1300) - 41;
             wordle = words[randomNumber]
-            //console.log(wordle)
+            console.log(wordle)
         })
+
 }
 getWordle()
 
@@ -111,7 +112,6 @@ const handleClick = (letter) => {
 }
 
 const addLetter = (letter) => {
-    const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
     if (currentTile < 5 && currentRow < 6) {
         const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
         tile.textContent = letter
@@ -131,6 +131,7 @@ const deleteLetter = () => {
         tile.textContent = ''
         guessRows[currentRow][currentTile] = ''
         tile.setAttribute('data', '')
+
     }
 
 }
@@ -152,6 +153,7 @@ const checkRow = () => {
                     flipTile()
                     if (wordle == guess) {
                         showMassage('Harika!')
+                        bounceTile()
                         isGameOver = true
                         return
                     } else {
@@ -185,7 +187,7 @@ const showMassage = (message) => {
         messageDisplay.removeChild(messageElement);
         messageDisplay.style.margin = '0'
 
-    }, 4000)
+    }, 3000)
 }
 
 const addColorToKey = (keyLetter, color) => {
@@ -233,4 +235,12 @@ const shakeTile = () => {
         tile.classList.add('shake')
     })
 }
+const bounceTile = () => {
+    const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
+    rowTiles.forEach((tile, index) => {
+        setTimeout(() => {
+            tile.classList.add('win')
+        }, 2000)
+    })
 
+}
